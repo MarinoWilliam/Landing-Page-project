@@ -52,7 +52,7 @@ for (let i =0;i< sections.length;i++){
     navBar.appendChild(item); 
     item.addEventListener('click', function (){
         sections[i].scrollIntoView({behavior: "smooth", block: "start"});
-        clearTimeout(myTimeout);
+        clearTimeout();
         
     });
 };
@@ -62,7 +62,7 @@ for (let i =0;i< sections.length;i++){
 document.addEventListener('mousemove',function(e) {
     if (barEl.classList.contains("invisable")){
         barEl.classList.remove("invisable");
-        var myTimeout =setTimeout(hideBar, 3000);
+        setTimeout(hideBar, 3000);
     }
 
     
@@ -128,7 +128,7 @@ document.addEventListener('scroll', function() {
     liElements[min].classList.add("underlined");
     if (barEl.classList.contains("invisable")){
         barEl.classList.remove("invisable");
-        var myTimeout =setTimeout(hideBar, 3000);
+        setTimeout(hideBar, 3000);
     }
     
 
