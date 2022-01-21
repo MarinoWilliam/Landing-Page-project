@@ -22,9 +22,9 @@
  * Define Global Variables
  * 
 */
-const sections =document.querySelectorAll(".landing__container");
-const navBar =document.querySelector("ul");
-const barEl =document.querySelector(".navbar__menu ul")
+const sections = document.querySelectorAll(".landing__container");
+const navBar = document.querySelector("ul");
+const barEl = document.querySelector(".navbar__menu ul")
 
 /**
  * End Global Variables
@@ -32,7 +32,7 @@ const barEl =document.querySelector(".navbar__menu ul")
  * 
 */
 
-function hideBar(){
+function hideBar() {
     barEl.classList.add("invisable");
 };
 
@@ -45,47 +45,48 @@ setTimeout(hideBar, 5000);
 
 // build the nav
 
-for (let i =0;i< sections.length;i++){
-    var item = document.createElement("LI");
-    item.innerHTML =`<h4> ${sections[i].querySelector("h2").innerText}<\h4>`;
+for (let i = 0; i < sections.length; i++) {
+    let item = document.createElement("LI");
+    item.innerHTML = `<h4> ${sections[i].querySelector("h2").innerText}<\h4>`;
     item.classList.add("notTouched")
-    navBar.appendChild(item); 
-    item.addEventListener('click', function (){
-        sections[i].scrollIntoView({behavior: "smooth", block: "start"});
+    navBar.appendChild(item);
+    item.addEventListener('click', function (event) {
+        event.preventDefault()
+        sections[i].scrollIntoView({ behavior: "smooth", block: "start" });
         clearTimeout();
-        
+
     });
 };
 
 
 
-document.addEventListener('mousemove',function(e) {
-    if (barEl.classList.contains("invisable")){
+document.addEventListener('mousemove', function (e) {
+    if (barEl.classList.contains("invisable")) {
         barEl.classList.remove("invisable");
         setTimeout(hideBar, 3000);
     }
 
-    
+
 });
 
 
 
-const liArr=navBar.querySelectorAll("li");
-for (const i in liArr){
-    liArr[i].onmouseover = function(){
-        for (var j=0;j< liArr.length;j++){
+const liArr = navBar.querySelectorAll("li");
+for (const i in liArr) {
+    liArr[i].onmouseover = function () {
+        for (var j = 0; j < liArr.length; j++) {
             liArr[j].classList.add("notTouched");
             liArr[j].classList.remove("touched");
         }
         liArr[i].classList.remove("notTouched");
         liArr[i].classList.add("touched");
-        
-    };
-    }
 
-const mainBody=document.querySelector("main");
-mainBody.onmouseover=function(){
-    for (var j=0;j< liArr.length;j++){
+    };
+}
+
+const mainBody = document.querySelector("main");
+mainBody.onmouseover = function () {
+    for (var j = 0; j < liArr.length; j++) {
         liArr[j].classList.add("notTouched");
         liArr[j].classList.remove("touched");
     }
@@ -106,19 +107,19 @@ mainBody.onmouseover=function(){
 
 // Scroll to section on link click
 
-document.addEventListener('scroll', function() {
-    var disArr=[];
-    for (let i =0;i< sections.length;i++){
-        disArr.push(Math.abs(0-sections[i].getBoundingClientRect().top));
+document.addEventListener('scroll', function () {
+    var disArr = [];
+    for (let i = 0; i < sections.length; i++) {
+        disArr.push(Math.abs(0 - sections[i].getBoundingClientRect().top));
     }
     var min = 0;
-    for (const i in disArr){
-        if(disArr[i]<disArr[min]){
-            min=i
+    for (const i in disArr) {
+        if (disArr[i] < disArr[min]) {
+            min = i
         }
     }
-    liElements =barEl.querySelectorAll("li");
-    for (let i =0;i< sections.length;i++){
+    liElements = barEl.querySelectorAll("li");
+    for (let i = 0; i < sections.length; i++) {
         sections[i].parentElement.classList.remove("your-active-class");
         liElements[i].classList.remove("underlined");
     }
@@ -126,10 +127,10 @@ document.addEventListener('scroll', function() {
 
     sections[min].parentElement.classList.add("your-active-class");
     liElements[min].classList.add("underlined");
-    if (barEl.classList.contains("invisable")){
+    if (barEl.classList.contains("invisable")) {
         barEl.classList.remove("invisable");
         setTimeout(hideBar, 3000);
     }
-    
+
 
 });
